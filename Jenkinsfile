@@ -20,7 +20,7 @@ stages {
                  script{
 
                         
-                           git "https://github.com/Jyoshna1610/chef-terra-vault.git"
+                           git "https://github.com/Jyoshna1610/VaultChef.git"
                         
                     }
                 }
