@@ -28,7 +28,7 @@ stages {
                             
         stage('Plan') {
             steps {
-                     withCredentials([vaultString(credentialsId: 'AWS_ACCESS_KEY_VAULT', variable: 'AWS-ACCESS-ID'), vaultString(credentialsId: 'AWS_SECRET_ACCESS_KEY_VAULT', variable: 'AWS-SECRET-ID')]) {
+                     withCredentials([vaultString(credentialsId: 'AWS_ACCESS_KEY_VAULT', variable: 'AWS_ACCESS_KEY_ID'), vaultString(credentialsId: 'AWS_SECRET_ACCESS_KEY_VAULT', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                 bat 'cd&cd terraform/Terraform-Vault & terraform init -input=false'
                 bat 'cd&cd terraform/Terraform-Vault & terraform destroy -auto-approve'
                 bat "cd&cd terraform/Terraform-Vault & terraform plan -input=false -out tfplan"
@@ -40,7 +40,7 @@ stages {
 
         stage('Apply') {
             steps {
-                    withCredentials([vaultString(credentialsId: 'AWS_ACCESS_KEY_VAULT', variable: 'AWS-ACCESS-ID'), vaultString(credentialsId: 'AWS_SECRET_ACCESS_KEY_VAULT', variable: 'AWS-SECRET-ID')]) {
+                    withCredentials([vaultString(credentialsId: 'AWS_ACCESS_KEY_VAULT', variable: 'AWS_ACCESS_KEY_ID'), vaultString(credentialsId: 'AWS_SECRET_ACCESS_KEY_VAULT', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                 bat "cd&cd terraform/Terraform-Vault & terraform apply -input=false tfplan"
                     }
             }
