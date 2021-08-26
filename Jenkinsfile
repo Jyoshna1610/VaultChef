@@ -7,7 +7,7 @@ agent  any
 stages {
          stage('Vault - AWS connection check') {
             steps {
-                withCredentials([vaultString(credentialsId: 'AWS_ACCESS_KEY_VAULT', variable: 'AWS-ACCESS-ID'), vaultString(credentialsId: 'AWS_SECRET_ACCESS_KEY_VAULT', variable: 'AWS-SECRET-ID')]) {
+                withCredentials([vaultString(credentialsId: 'AWS_ACCESS_KEY_VAULT', variable: 'AWS_ACCESS_KEY_ID'), vaultString(credentialsId: 'AWS_SECRET_ACCESS_KEY_VAULT', variable: 'AWS_SECRET_ACCESS_KEY')]) {
                        sh '''
                         aws --version
                         aws ec2 describe-instances
