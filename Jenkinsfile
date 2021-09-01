@@ -55,8 +55,8 @@ stages {
                 sh 'sudo rm -rf $WORKSPACE/Berksfile.lock'
                 sh 'mv $WORKSPACE/* $CHEFREPO/chef-repo/cookbooks/apache'
                 sh "knife cookbook upload apache --force -o $CHEFREPO/chef-repo/cookbooks -c $CHEFREPO/chef-repo/.chef/knife.rb"
-                withCrecdentials([sshUserPrivateKey(credentialsID:agent-creds',keyFilevariable:'AGENT_SSHKEY', passphraseVariables:'',
-                sh "knife ssh 'role:webserver' -x ubuntu -i $AGENT_SSHKEY 'sudo Chef-client' -c $CHEFREPO/chef-repo/.chef/knife.rb"
+                withCredentials([vaultString(credentialsId: 'AWS_ACCESS_KEY_VAULT', variable: 'AWS_ACCESS_KEY_ID'), vaultString(credentialsId: 'AWS_SECRET_ACCESS_KEY_VAULT', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                sh 'sudo Chef-client' -c $CHEFREPO/chef-repo/.chef/knife.rb"
                 }
               }
         }
